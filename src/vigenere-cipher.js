@@ -66,9 +66,9 @@ class VigenereCipheringMachine {
     
 
     //делаем ключ равный длине строки
-    while(key.length != message.length){
+    while(key.length < message.length){
       for(let i=0;i<key.length;i++){
-        if(key.length != message.length){
+        if(key.length < message.length){
           key=key+key[i];
         }else{
           break;
@@ -92,7 +92,7 @@ class VigenereCipheringMachine {
       newMsg.splice(spaceIndex[i],0,' ')
     }
 
-    if(this.flag = false){
+    if(this.flag == false){
       return newMsg.reverse().join('')
     }
 
@@ -143,9 +143,9 @@ class VigenereCipheringMachine {
     
 
     //делаем ключ равный длине строки
-    while(key.length != encryptedMessage.length){
+    while(key.length < encryptedMessage.length){
       for(let i=0;i<key.length;i++){
-        if(key.length != encryptedMessage.length){
+        if(key.length < encryptedMessage.length){
           key=key+key[i];
         }else{
           break;
@@ -169,7 +169,7 @@ class VigenereCipheringMachine {
       newMsg.splice(spaceIndex[i],0,' ')
     }
 
-    if(this.flag = false){
+    if(this.flag == false){
       return newMsg.reverse().join('')
     }
 
@@ -178,9 +178,6 @@ class VigenereCipheringMachine {
 
 }
 
-
-const directMachine = new VigenereCipheringMachine();
-console.debug(directMachine.decrypt(undefined, 'key'))
 
 
 module.exports = {
