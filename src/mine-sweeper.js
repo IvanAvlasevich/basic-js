@@ -23,10 +23,117 @@ const { NotImplementedError } = require('../extensions/index.js');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function minesweeper( matrix ) {
+  let begin=[];
+  let newMatrix = [
+    [],
+    [],
+    []
+  ];
+  matrix.forEach(value=>{
+    value.forEach(item=>{
+      if(item==true){begin.push(item)}
+    })
+  })
+  //если нету в массиве тру
+  if(begin.length==0){
+    for(let i=0;i<matrix.length;i++){
+      for (let j=0; j<matrix[i].length;j++){
+        matrix[i][j]=0
+      }
+    }
+  }
+  //если есть тру 
+  let g=0;
+  if(begin.length>0){
+    for(let i=0;i<matrix.length;i++){
+      for (let j=0; j<matrix[i].length;j++){
+        
+        if(i==0 && j==0){
+          if (matrix[i+1][j]==true){g++}
+          if (matrix[i][j+1]==true){g++}
+          if (matrix[i+1][j+1]==true){g++}
+          newMatrix[i][j]=g;
+        }
+        if(i==0 && j>0 && j!=matrix[i].length-1){
+          if (matrix[i+1][j]==true){g++}
+          if (matrix[i][j+1]==true){g++}
+          if (matrix[i+1][j+1]==true){g++}
+          if (matrix[i][j-1]==true){g++}
+          if (matrix[i+1][j-1]==true){g++}
+          newMatrix[i][j]=g;
+        }
+        if(i==0 && j==matrix[i].length-1){
+          if (matrix[i][j-1]==true){g++}
+          if (matrix[i+1][j]==true){g++}
+          if (matrix[i+1][j-1]==true){g++}
+          newMatrix[i][j]=g;
+        }
+        if(i>0 && i!=matrix.length-1 && j==0){
+          if (matrix[i+1][j]==true){g++}
+          if (matrix[i-1][j]==true){g++}
+          if (matrix[i][j+1]==true){g++}
+          if (matrix[i-1][j+1]==true){g++}
+          if (matrix[i+1][j-1]==true){g++}
+          newMatrix[i][j]=g;
+          console.debug(matrix[i][j])
+        }
+        if(i>0 && i!=matrix.length-1 && j>0 && j!=matrix[i].length-1){
+          if (matrix[i+1][j]==true){g++; }
+          if (matrix[i-1][j]==true){g++;}
+          if (matrix[i][j+1]==true){g++;}
+          if (matrix[i][j-1]==true){g++;}
+          if (matrix[i-1][j+1]==true){g++;console.debug('true',matrix[i-1][j+1])}
+          if (matrix[i-1][j-1]==true){g++}
+          if (matrix[i+1][j+1]==true){g++}
+          if (matrix[i+1][j-1]==true){g++}
+          newMatrix[i][j]=g;
+          console.debug(matrix[i][j])
+        }
+        if(i>0 && i!=matrix.length-1 && j==matrix[i].length-1){
+          if (matrix[i+1][j]==true){g++}
+          if (matrix[i-1][j]==true){g++}
+          if (matrix[i][j-1]==true){g++}
+          if (matrix[i-1][j-1]==true){g++}
+          if (matrix[i+1][j-1]==true){g++}
+          newMatrix[i][j]=g;
+          console.debug(matrix[i][j])
+        }
+        if(i==matrix.length-1 && j==0){
+          if (matrix[i-1][j]==true){g++}
+          if (matrix[i-1][j+1]==true){g++}
+          if (matrix[i][j+1]==true){g++}
+          newMatrix[i][j]=g;
+        }
+        if(i==matrix.length-1 && j>0 && j!=matrix[i].length-1){
+          if (matrix[i][j+1]==true){g++}
+          if (matrix[i][j-1]==true){g++}
+          if (matrix[i-1][j+1]==true){g++}
+          if (matrix[i-1][j-1]==true){g++}
+          if (matrix[i-1][j]==true){g++}
+          newMatrix[i][j]=g;
+        }
+        if(i==matrix.length-1 &&  j==matrix[i].length-1){
+          if (matrix[i][j-1]==true){g++}
+          if (matrix[i-1][j]==true){g++}
+          if (matrix[i-1][j-1]==true){g++}
+          newMatrix[i][j]=g;
+        }
+
+
+      g=0;
+    }
+  }
+  }
+
+  return newMatrix
 }
+
+console.debug(minesweeper([
+    [true, false, false],
+    [false, true, false],
+    [false, false, false]
+    ]))
 
 module.exports = {
   minesweeper
